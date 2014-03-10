@@ -1,0 +1,9 @@
+<h3>Pragmatic Order Shipped</h3>
+<p>
+  此封信提醒你訂單已出貨, 出貨時間：<%= @order.ship_date.to_s %>
+</p>
+
+<table>
+  <tr><th colspan="2">Qty</th><th>產品描述</th></tr>
+  <%= render @order.line_items %>
+</table> 

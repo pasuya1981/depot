@@ -1,0 +1,15 @@
+<% if line_item == @current_item %>
+  <tr id="current_item">
+<% else %>
+  <tr>
+<% end %>
+
+  <td><%= line_item.quantity %>&times;</td>
+  <td><%= line_item.product.title %></td>
+  <td id="item_price"><%= number_to_currency(line_item.total_price) %></td>
+  <% if controller.controller_name != 'orders' %>
+    <% if controller.controller_name != 'OrderNofifier' %>
+      <td><%= button_to '減1', line_item, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  <% end %>
+</tr> 

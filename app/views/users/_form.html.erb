@@ -1,0 +1,48 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if notice %>
+    <p><%= notice %></p>
+  <% end %>
+
+  <fieldset>
+  <legend>輸入使用者資訊</legend>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <% if params[:action] == 'edit' %>
+        <%= f.label :password, '舊密碼' %><br>
+      <% else %>
+        <%= f.label :password %><br>
+      <% end %>
+      <%= f.password_field :password %>
+    </div>
+    <% if params[:action] == 'edit' %>
+      <div class="field">
+        <%= label_tag :new_password %><br>
+        <%= password_field_tag :new_password, params[:new_password] %>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="actions">
+      <%= f.submit '提交' %>
+    </div>
+  </fieldset>
+
+<% end %>

@@ -1,0 +1,18 @@
+.total_price {
+  font-weight: bold;
+  border-top: dotted 1px red;
+}
+
+.order_title {
+  color: blue;
+  background-color: grey;
+}
+
+table {
+  background-color: pink;
+  margin-bottom: 20px;
+  .title {
+    border-bottom: 1px dotted;
+  }
+}
+

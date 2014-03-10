@@ -1,0 +1,31 @@
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<h1>書本分類</h1>
+<% if session[:counter] > 5 %>
+  <div class="counter">
+    <p>You have hit this page for <%= pluralize(session[:counter], 'time') %></p>
+  </div>
+<% end %>
+
+<% cache ['store', Product.latest] do %>
+
+  <% @products.each do |product| %>
+
+    <% cache ['entry', product] do %>
+    
+      <div class="entry">
+        <%= image_tag(product.image_url) %>
+        <h3><%= product.title %></h3>
+        <%= sanitize(product.description) %>
+        <div class="price_line">
+          <span class="price"><%= number_to_currency(product.price) %></span>
+          <%= button_to '加入購物車', line_items_path(product_id: product), remote: true %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+

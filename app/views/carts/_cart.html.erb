@@ -1,0 +1,21 @@
+<h2>你的購物車</h2>
+<table>
+  <%= render cart.line_items %>
+
+  <tr class="total_line">
+    <td colspan="2">總計</td>
+    <td class="total_cell"><%= number_to_currency(cart.total_price) %></td>
+  </tr>
+</table>
+
+<%= button_to '結帳', new_order_path, 
+  method: :get,
+  disabled: cart.line_items.empty? || current_page?(new_order_path)
+%>
+
+<%= button_to '清空', cart, 
+  method: :delete, 
+  remote: true, 
+  disabled: current_page?(new_order_path) ,
+  data: { confirm: 'Are you sure?' } 
+%>

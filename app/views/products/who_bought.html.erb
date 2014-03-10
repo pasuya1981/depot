@@ -1,0 +1,35 @@
+<h1>Who bought <%= @product.title %></h1>
+
+<% @product.orders.each do |order| %>
+  
+  <table>
+    <tr class="order_title">
+      <td colspan="3">
+        <%= "Order #{order.id}, Buyer: #{order.name}" %>
+      </td>
+    </tr>
+    <tr class="title">
+      <th>產品</th>
+      <th>數量</th>
+      <th>總價</th>
+    </tr>
+    <% order.line_items.each do |item| %>
+      <tr>
+        <td><%= item.product.title %></td>
+        <td><%= item.quantity %></td>
+        <td><%= item.total_price %></td>
+      </tr>
+    <% end %>
+    <tr class="total_price">
+      <th colspan="2">Total Price</th>
+      <td><%= order.line_items.map(&:total_price).sum %></td>
+    </tr>
+    <tr>
+      <td align="right" colspan="3">Paid by <%= order.pay_type %></td>
+    </tr>
+  </table>
+  
+<% end %>
+
+
+  

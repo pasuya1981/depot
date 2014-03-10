@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Depot</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="<%= controller.controller_name %>">
+  <div id="banner">
+    <%= image_tag('logo.png') %>
+    <%= @page_title || "Pragmatic Bookshelf" %>
+  </div>
+  <div id="columns">
+    <div id="side">
+
+      <!-- This 3 lines will return just 'content_tag' -->
+      <% if @cart %>
+        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render @cart %>
+        <% end %>
+      <% end %>
+      
+      <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <li><a href="#">問與答</a></li>
+        <li><a href="http://www....">最新消息</a></li>
+        <li><a href="http://www....">連絡</a></li>
+        <li id="time">Page Displayed at: <%= Time.now.to_formatted_s(:db) %></li>
+      </ul>
+      <% if session[:user_id] %>
+        <ul>
+          <li><%= link_to 'Orders', orders_path %></li>
+          <li><%= link_to 'Products', products_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+        <%= button_to '登出', logout_path, method: :delete %>
+      <% else %>
+        <%= button_to '登入', login_path, method: :get %>
+      <% end %>
+    </div>
+    <div id="main">
+      <%= yield %>
+    </div>
+  </div>
+
+  <% if Rails.env.development? %>
+    <%= debug(params) %>
+    <%= "params: #{params.inspect}" %>
+  <% end %>
+
+</body>
+</html>
