@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'jquery-ui-rails'
 
 gem 'bcrypt-ruby'
@@ -14,6 +16,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Use SCSS for stylesheets
